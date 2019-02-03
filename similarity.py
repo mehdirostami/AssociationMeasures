@@ -9,13 +9,7 @@ import copy
 
 
 def distcorr(u, v, pval, nruns=500):
-    """ Compute the distance correlation function, returning the p-value.
-    Based on Satra/distcorr.py (gist aa3d19a12b74e9ab7941)
-    >>> a = [1,2,3,4,5]
-    >>> b = np.array([1,2,9,4,4])
-    >>> distcorr(a, b)
-    (0.76267624241686671, 0.404)
-    """
+
     X = u.flatten().reshape(-1, 1)
     Y = v.flatten().reshape(-1, 1)
     n = X.shape[0]
@@ -43,11 +37,6 @@ def distcorr(u, v, pval, nruns=500):
         return dcor
 
 
-x = np.random.normal(size=(1000,))
-y = np.random.normal(size=(1000,))
-print(distcorr(x, y, pval=True))
-
-exit()
 def pearson(u, v, pval):
     if pval == True:
         corr, pval = sp.stats.pearsonr(u, v)
@@ -87,11 +76,6 @@ def taustar(u, v, pval):
         ro.r('testResults = tauStarTest(x,y)')
         pvalue = ro.r('testResults$pVal[1]')[0]
         return([float(tau_star)] + [float(pvalue)])
-
-# ro.r('x = rnorm(1000)')
-# ro.r('y = rnorm(1000)')
-# ro.r('testResults = tauStarTest(x,y)')
-# ro.r('print(testResults$pVal)')
 
 def matrix_associations(A, method, pval=False):
 
